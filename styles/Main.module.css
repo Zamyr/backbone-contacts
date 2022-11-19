@@ -1,0 +1,35 @@
+.content {
+    padding-top: 50px;
+}
+
+.linkTable > a {
+    color: black;
+    padding: 0px 5px;
+}
+
+.linkTable > a:hover {
+    color: blue;
+    padding: 0px 5px;
+    border-bottom: 1px solid;
+    padding-bottom: 1px;
+}
+
+.contactsTable > tbody >tr:hover {
+    background-color: #ccc;
+}
+
+.searchBox{
+    margin: 20px 0px;
+    display: flex;
+    justify-content: end;
+    position: relative;
+}
+
+.searchBox > .searchInput{
+    width: 50%;
+}
+
+.searchBox > .searchButton{
+    position: absolute;
+    top: 5px;
+}
