@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Alerts from "../../../src/components/Alerts";
 import { useDispatch, useSelector } from "react-redux";
-import { ContactType } from "../../../src/types";
+import { ContactStateType } from "../../../src/types";
 import {useRouter} from 'next/router'
 import {updateContact} from '../../../src/redux/contacts/actions'
 
@@ -34,7 +34,7 @@ const initialState = {
 
 export default function Edit() {
   const [messageError, setMessageError] = useState<initialStateType>(initialState);
-  const contacts = useSelector<ContactType, {}>((state) => state.contacts);
+  const contacts = useSelector((state: ContactStateType) => state.contacts);
   const router = useRouter()
   const dispatch = useDispatch()
 

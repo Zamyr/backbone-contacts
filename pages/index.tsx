@@ -5,15 +5,17 @@ import TableContact from "../src/components/TableContact";
 import { useRouter } from "next/router";
 import {clearContact} from '../src/redux/contacts/actions'
 import { useDispatch } from "react-redux";
-
 import Alert from '@mui/material/Alert';
+
+interface MsgType {
+  msg: {}
+}
 
 export default function Home() {
   
   const router = useRouter()
   const dispatch = useDispatch()
   const [closeAlert, setCloseAlert] = useState<{}>(router.query)
-  console.log(router.query);
   
   useEffect(() => {
     dispatch(clearContact())

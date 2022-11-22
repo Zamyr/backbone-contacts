@@ -7,19 +7,13 @@ import Input from "@mui/joy/Input";
 import Box from "@mui/joy/Box";
 import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
-import { ContactType } from "../../../src/types";
+import { ContactStateType } from "../../../src/types";
 import {useRouter} from 'next/router'
 import {clearContact} from '../../../src/redux/contacts/actions'
 
-interface initialStateType {
-  message: string;
-  type: string;
-  loaded: boolean;
-}
-
 export default function Delete() {
   const [messageError, setMessageError] = useState<string>("");
-  const contacts = useSelector<ContactType, {}>((state) => state.contacts);
+  const contacts = useSelector((state: ContactStateType) => state.contacts);
   const router = useRouter()
   const dispatch = useDispatch()
 

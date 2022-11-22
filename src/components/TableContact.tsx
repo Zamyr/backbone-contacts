@@ -16,11 +16,13 @@ import { updateContact } from "../redux/contacts/actions";
 import { TextField, FormGroup, IconButton, Button } from "@mui/material";
 
 interface PropTypes {
+  [x: string]: any;
   contacts: [];
 }
 
 export default function TableContact() {
-  const [contacts, setContacts] = useState<PropTypes>([]);
+  const [contacts, setContacts] = useState<PropTypes>();
+  const [contactsCounts, setContactsCounts] = useState<number>(0);
   const [perPage, setPerPage] = useState<number>(10);
   const [page, setPage] = useState<number>(0);
   const [searchPhone, setSearchPhone] = useState<string>("");
@@ -35,7 +37,9 @@ export default function TableContact() {
       `https://bkbnchallenge.herokuapp.com/contacts?phone_contains=${searchPhone}`
     );
     const response = await res.json();
-    setContacts(response);
+
+    setContactsCounts(response.count);
+    setContacts(response.results);
     setSearchPhone('')
   }, [searchPhone]);
 
@@ -46,7 +50,9 @@ export default function TableContact() {
       }&_sort=createdAt:DESC`
     );
     const response = await res.json();
-    setContacts(response);
+    
+    setContactsCounts(response.count);
+    setContacts(response.results);
   }, [perPage, page]);
 
   useEffect(() => {
@@ -101,9 +107,9 @@ export default function TableContact() {
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
-          {contacts.results && (
+          {contacts && (
             <TableBody>
-              {contacts.results.map((row: ContactType) => (
+              {contacts.map((row: ContactType) => (
                 <TableRow
                   key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -131,13 +137,13 @@ export default function TableContact() {
               ))}
             </TableBody>
           )} 
-          {!contacts?.results && <caption>We don&apos;t have contacts yet</caption>}
+          {!contacts && <caption>We don&apos;t have contacts yet</caption>}
         </Table>
-        {contacts.results && (
+        {contacts && (
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={contacts.count}
+            count={contactsCounts}
             rowsPerPage={perPage}
             page={page}
             onPageChange={handleChangePage}
