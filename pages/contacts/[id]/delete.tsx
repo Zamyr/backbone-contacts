@@ -36,9 +36,10 @@ export default function Delete() {
           return;
         }
         dispatch(clearContact())
+        const msg:string = `${contacts.firstName} ${contacts.lastName} was deleted`
         router.push({
           pathname: '/',
-          query: { msg: `${contacts.firstName} ${contacts.lastName} was deleted`},
+          query: { msg },
         })
       })
       .catch((err) =>

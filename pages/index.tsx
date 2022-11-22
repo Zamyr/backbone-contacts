@@ -8,15 +8,15 @@ import { useDispatch } from "react-redux";
 import Alert from '@mui/material/Alert';
 
 interface MsgType {
-  msg: {}
+  msg: {[key: string]: any}
 }
 
 export default function Home() {
   
   const router = useRouter()
   const dispatch = useDispatch()
-  const [closeAlert, setCloseAlert] = useState<{}>(router.query)
-  
+  const [closeAlert, setCloseAlert] = useState<boolean>(!!router.query?.msg)
+
   useEffect(() => {
     dispatch(clearContact())
   }, [dispatch])
@@ -25,7 +25,7 @@ export default function Home() {
     <div className={styles.content}>
       <Container>
         <h1>Contacts</h1>
-        {!!closeAlert?.msg && <Alert severity="error" onClose={() => setCloseAlert({})}>{closeAlert?.msg}</Alert>}
+        {closeAlert && <Alert severity="error" onClose={() => setCloseAlert(false)}>{router.query?.msg}</Alert>}
         <TableContact />
       </Container>
     </div>
