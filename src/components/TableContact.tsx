@@ -131,7 +131,7 @@ export default function TableContact() {
               ))}
             </TableBody>
           )} 
-          {!contacts?.results && <caption>We don't have contacts yet</caption>}
+          {!contacts?.results && <caption>We don&apos;t have contacts yet</caption>}
         </Table>
         {contacts.results && (
           <TablePagination
